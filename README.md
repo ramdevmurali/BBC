@@ -1,7 +1,9 @@
 # HMLR Data Science Challenge: NLP & Computer Vision
 
 **Candidate:** Ramdev Murali
+
 **Date:** 02/07/2025
+
 **Challenge Tackled:** Natural Language Processing
 
 ---
