@@ -2,13 +2,12 @@
 
 **Candidate:** Ramdev Murali
 <<<<<<< HEAD
-**Date:** [Enter Current Date, e.g., June 5, 2024]
+**Date:** July 2, 2025
 =======
 
 **Date:** 02/07/2025
 
 **Challenge Tackled:** Natural Language Processing
->>>>>>> 547945a1ddd87d14cacacf0cab96845bc50db8fa
 
 ---
 
@@ -127,4 +126,3 @@ While this prototype successfully meets the challenge requirements, the followin
 3.  **Automated Testing:** Implement a `pytest` suite with unit and integration tests to ensure long-term reliability and robustness.
 =======
 The model outputs demonstrate a strong ability to correctly classify articles, identify key entities, and produce relevant, fluent summaries, successfully meeting all requirements of the challenge.
->>>>>>> 547945a1ddd87d14cacacf0cab96845bc50db8fa
