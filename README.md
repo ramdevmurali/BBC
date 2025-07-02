@@ -31,7 +31,7 @@ This multi-stage approach showcases a robust skillset in model selection, rapid 
 This repository is structured to separate application code from experimental/training code.
 
 -   `/src`: Contains the modular, professional application code for running inference with the models.
--   `/notebooks`: Contains the Jupyter/Colab notebooks used for experimentation, including the final `3_Fine_Tuning_DistilBERT.ipynb` used to train the high-performance model.
+-   `/notebooks`: Contains the Google Colab notebook (Fine_Tuning_and_Evaluation.ipynb) detailing the experimentation and fine-tuning process for the high-performance model.
 -   `/outputs`: Contains the final evaluation artifacts, such as the confusion matrix.
 -   `/models`: (Local Only, Ignored by Git) This folder is the destination for the trained model artifacts downloaded from the Colab notebook.
 
