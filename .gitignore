@@ -72,3 +72,5 @@ Thumbs.db
 # Large Data Files (Optional, but good practice if data is very large)
 # If you were to add more large raw data files, you would list them here.
 # data/raw/large_dataset.zip
+# Ignore large model files
+models/
