@@ -22,7 +22,7 @@ This project adheres to professional software engineering and MLOps principles.
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
     -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This separates research from deployable code.
 -   **Reproducibility:** A `venv` (Python virtual environment) ensures a consistent and isolated runtime.
--   **Version Control:** The project uses Git for version control, with a comprehensive `.gitignore` to maintain a clean repository by excluding large, generated, or environment-specific files.
+-   **Version Control:** The project uses Git for version control. The `.gitignore` file is meticulously maintained to exclude large, generated artifacts (like the `models/` directory containing trained model weights) and environment-specific files, ensuring a clean and efficient repository for source code.
 
 ---
 
@@ -61,7 +61,7 @@ To fully reproduce and understand this project, please follow these steps.
     ```
 
 5.  **Re-generate the High-Performance Model (Optional, but Recommended):**
-    The fine-tuned model itself is too large for Git and is therefore excluded (see `.gitignore` justification below). To obtain it:
+    The fine-tuned model itself is too large for Git and is therefore excluded (as explicitly managed by `.gitignore`). To obtain it:
     -   Open the Colab notebook: `notebooks/Fine_Tuning_and_Evaluation.ipynb`
     -   Run all cells in the notebook. This process will:
         -   Prompt you to upload the `bbc.zip` data (same as step 2).
@@ -123,7 +123,8 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 After establishing a 60% accuracy baseline with the Zero-Shot model, the fine-tuned `DistilBERT` achieved **~100% accuracy** on the unseen test set, effectively solving the classification task.
 
 **Final Classification Report (Fine-Tuned Model):**
-```               precision    recall  f1-score   support
+```
+               precision    recall  f1-score   support
 
      business       1.00      1.00      1.00        51
 entertainment       0.97      1.00      0.99        39
