@@ -1,7 +1,14 @@
 # HMLR Data Science Challenge: Natural Language Processing
 
 **Candidate:** Ramdev Murali
+<<<<<<< HEAD
 **Date:** [Enter Current Date, e.g., June 5, 2024]
+=======
+
+**Date:** 02/07/2025
+
+**Challenge Tackled:** Natural Language Processing
+>>>>>>> 547945a1ddd87d14cacacf0cab96845bc50db8fa
 
 ---
 
@@ -112,8 +119,12 @@ The off-diagonal values provide valuable insight into the inherent ambiguity of 
 
 ---
 
+<<<<<<< HEAD
 ## 5. Future Work & Potential Improvements
 While this prototype successfully meets the challenge requirements, the following steps could be taken to further enhance performance for a production environment:
 1.  **Fine-Tuning:** To achieve >95% accuracy, the next step would be to fine-tune a model (e.g., DistilBERT) specifically on the BBC dataset. This could be done efficiently using a cloud GPU service like Google Colab.
 2.  **Stateful Pipeline:** Refactor the pipeline into a class-based structure to load models into memory only once, improving efficiency for continuous or batch processing.
 3.  **Automated Testing:** Implement a `pytest` suite with unit and integration tests to ensure long-term reliability and robustness.
+=======
+The model outputs demonstrate a strong ability to correctly classify articles, identify key entities, and produce relevant, fluent summaries, successfully meeting all requirements of the challenge.
+>>>>>>> 547945a1ddd87d14cacacf0cab96845bc50db8fa
