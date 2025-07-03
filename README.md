@@ -20,8 +20,8 @@ This project adheres to professional software engineering and MLOps principles.
 -   **Languages & Libraries:** Python 3.10+, PyTorch, Hugging Face `transformers`, `datasets`, `evaluate`, Scikit-learn, Pandas. Dependencies are precisely managed via `requirements.txt`.
 -   **Architecture:**
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
-    -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This separates research from deployable code.
--   **Reproducibility:** A `venv` (Python virtual environment) ensures a consistent and isolated runtime.
+    -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This cleanly separates research from deployable code.
+-   **Reproducibility:** A `venv` (Python virtual environment) ensures a consistent and isolated runtime for local execution.
 -   **Version Control:** The project uses Git for version control. The `.gitignore` file is meticulously maintained to exclude large, generated artifacts (like the `models/` directory containing trained model weights) and environment-specific files, ensuring a clean and efficient repository for source code.
 
 ---
@@ -54,29 +54,30 @@ To fully reproduce and understand this project, please follow these steps.
         pip install -r requirements.txt
         ```
 
-4.  **Run the Baseline Application:**
+4.  **Run the Baseline Application (Local Execution):**
     This command executes the core application, which performs sub-category classification, NER, and summarization using a Zero-Shot model. Results are saved to `outputs/`.
     ```bash
     python -m src.main
     ```
 
-5.  **Re-generate the High-Performance Model (Optional, but Recommended):**
-    The fine-tuned model itself is too large for Git and is therefore excluded (as explicitly managed by `.gitignore`). To obtain it:
-    -   Open the Colab notebook: `notebooks/Fine_Tuning_and_Evaluation.ipynb`
-    -   Run all cells in the notebook. This process will:
+5.  **Generate/Obtain the High-Performance Model (GPU-Dependent Training):**
+    The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local evaluation:
+    -   **Process:** Open the Colab notebook `notebooks/Fine_Tuning_and_Evaluation.ipynb` in Google Colab.
+    -   Run all cells in the notebook. This will:
         -   Prompt you to upload the `bbc.zip` data (same as step 2).
-        -   Train the `DistilBERT` model using a Colab GPU.
+        -   Train the `DistilBERT` model using Colab's GPU.
         -   Generate updated performance metrics and a `finetuned_confusion_matrix.png`.
         -   Save the trained model files to a `bbc-distilbert-finetuned` folder and zip all results into `results.zip` for download.
     -   **Download `results.zip`** from Colab.
-    -   **Place the trained model:** Unzip `results.zip` and move the `bbc-distilbert-finetuned` folder into your local `models/` directory (`hmlr-nlp-challenge/models/`).
+    -   **Place the trained model locally:** Unzip `results.zip` and move the `bbc-distilbert-finetuned` folder into your local `models/` directory (`hmlr-nlp-challenge/models/`).
     -   **Place the updated confusion matrix:** Move `finetuned_confusion_matrix.png` into your local `outputs/` directory.
 
-6.  **Run Quantitative Evaluation (Locally):**
-    This script will now use the high-performance fine-tuned model (if downloaded in step 5) or the Zero-Shot model (otherwise) to generate detailed classification reports and a confusion matrix locally.
+6.  **Run Quantitative Evaluation (Local Execution):**
+    This script will now use the high-performance fine-tuned model (if successfully downloaded and placed in step 5) or revert to evaluating the Zero-Shot model (otherwise) to generate detailed classification reports and a confusion matrix locally.
     ```bash
     python -m src.evaluate
     ```
+    > **Note on Local Performance:** While model training is GPU-intensive and handled in Colab, the inference (prediction) for the fine-tuned model *can* run on a CPU. Be aware that processing the full dataset for evaluation locally will still take time on a CPU-only machine.
 
 ---
 
@@ -113,7 +114,7 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 -   **Model Selection Strategy:**
     -   **For Classification (Two-Phase Approach):**
         1.  **Baseline (Zero-Shot):** An initial Zero-Shot model (`valhalla/distilbart-mnli-12-3`) was used to rapidly establish a baseline and gain insights into data ambiguity without any custom training.
-        2.  **High-Performance (Fine-Tuned):** A `DistilBERT` model was subsequently **fine-tuned** on the BBC dataset to achieve state-of-the-art performance. This computationally intensive task necessitated the use of a GPU-enabled cloud environment (Google Colab).
+        2.  **High-Performance (Fine-Tuned):** A `DistilBERT` model was subsequently **fine-tuned** on the BBC dataset to achieve state-of-the-art performance. This computationally intensive task necessitated the use of a GPU-enabled cloud environment (Google Colab) for efficient training.
     -   **For NER & Summarization (Pre-Specialized Models):** To efficiently deliver these distinct functionalities, proven, **pre-specialized models** were leveraged rather than fine-tuning a general-purpose model from scratch. This included an off-the-shelf NER model (`dslim/bert-base-NER`) and a generative encoder-decoder model for summarization (`sshleifer/distilbart-cnn-12-6`), which is architecturally suited for text generation.
 
 ---
@@ -146,8 +147,8 @@ This near-perfect result is interpreted not as simple success, but as evidence o
 
 ## 7. Production Readiness & Next Steps
 
-Based on this analysis, the fine-tuned model, despite its score, is not immediately production-ready. The critical next steps would be:
+Based on this analysis, the fine-tuned model, despite its score, is not immediately production-ready for deployment in dynamic real-world environments. The critical next steps would be:
 
-1.  **Test for Domain Shift:** Evaluate the model on out-of-distribution data (e.g., news from 2025 or from a different publisher) to measure its true real-world generalization.
-2.  **Develop a Re-training Strategy:** Design a strategy for continuous monitoring and periodic re-training to ensure the model remains accurate as language and topics evolve.
-3.  **Deploy as a Service:** Integrate the finalized model into the robust `/src` application, containerize it (e.g., with Docker), and deploy it as a scalable inference API.
+1.  **Test for Domain Shift:** Evaluate the model on out-of-distribution data (e.g., news from 2025 or from a different publisher) to measure its true real-world generalization. This is crucial for understanding its performance under varying conditions.
+2.  **Develop a Re-training Strategy:** Design a strategy for continuous monitoring and periodic re-training to ensure the model remains accurate as language, news trends, and topics evolve over time.
+3.  **Deploy as a Service:** Integrate the finalized model into the robust `/src` application, containerize it (e.g., with Docker), and deploy it as a scalable inference API. This transition would facilitate its use in larger systems.
