@@ -55,29 +55,29 @@ To fully reproduce and understand this project, please follow these steps.
         ```
 
 4.  **Run the Baseline Application (Local Execution):**
-    This command executes the core application, which performs sub-category classification, NER, and summarization using a Zero-Shot model. Results are saved to `outputs/`.
+    This command executes the core application, which performs sub-category classification, NER, and summarization using the Zero-Shot model. Results are saved to `outputs/`.
     ```bash
     python -m src.main
     ```
 
 5.  **Generate/Obtain the High-Performance Model (GPU-Dependent Training):**
-    The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local evaluation:
+    The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local use and evaluation:
     -   **Process:** Open the Colab notebook `notebooks/Fine_Tuning_and_Evaluation.ipynb` in Google Colab.
-    -   Run all cells in the notebook. This will:
+    -   Run all cells in the notebook. This process will:
         -   Prompt you to upload the `bbc.zip` data (same as step 2).
         -   Train the `DistilBERT` model using Colab's GPU.
-        -   Generate updated performance metrics and a `finetuned_confusion_matrix.png`.
+        -   Generate its specific performance metrics and a `finetuned_confusion_matrix.png` within the notebook itself.
         -   Save the trained model files to a `bbc-distilbert-finetuned` folder and zip all results into `results.zip` for download.
     -   **Download `results.zip`** from Colab.
     -   **Place the trained model locally:** Unzip `results.zip` and move the `bbc-distilbert-finetuned` folder into your local `models/` directory (`hmlr-nlp-challenge/models/`).
     -   **Place the updated confusion matrix:** Move `finetuned_confusion_matrix.png` into your local `outputs/` directory.
 
-6.  **Run Quantitative Evaluation (Local Execution):**
-    This script will now use the high-performance fine-tuned model (if successfully downloaded and placed in step 5) or revert to evaluating the Zero-Shot model (otherwise) to generate detailed classification reports and a confusion matrix locally.
+6.  **Run Quantitative Evaluation of the Baseline (Local Execution):**
+    This script (`src/evaluate.py`) is designed to evaluate the **Zero-Shot (baseline) model's** performance on the main categories, demonstrating its initial capabilities.
     ```bash
     python -m src.evaluate
     ```
-    > **Note on Local Performance:** While model training is GPU-intensive and handled in Colab, the inference (prediction) for the fine-tuned model *can* run on a CPU. Be aware that processing the full dataset for evaluation locally will still take time on a CPU-only machine.
+    > **Note on Local Evaluation:** While model training is GPU-intensive and handled in Colab, inference (prediction) for *any* trained model (Zero-Shot or Fine-Tuned) can run on a CPU. Be aware that processing the full dataset for evaluation locally will still take time on a CPU-only machine.
 
 ---
 
@@ -113,7 +113,7 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 -   **Model Selection Strategy:**
     -   **For Classification (Two-Phase Approach):**
-        1.  **Baseline (Zero-Shot):** An initial Zero-Shot model (`valhalla/distilbart-mnli-12-3`) was used to rapidly establish a baseline and gain insights into data ambiguity without any custom training.
+        1.  **Baseline (Zero-Shot):** An initial Zero-Shot model (`valhalla/distilbart-mnli-12-3`) was used to rapidly establish a baseline and gain insights into data ambiguity without any custom training. Its performance metrics are available via `src/evaluate.py`.
         2.  **High-Performance (Fine-Tuned):** A `DistilBERT` model was subsequently **fine-tuned** on the BBC dataset to achieve state-of-the-art performance. This computationally intensive task necessitated the use of a GPU-enabled cloud environment (Google Colab) for efficient training.
     -   **For NER & Summarization (Pre-Specialized Models):** To efficiently deliver these distinct functionalities, proven, **pre-specialized models** were leveraged rather than fine-tuning a general-purpose model from scratch. This included an off-the-shelf NER model (`dslim/bert-base-NER`) and a generative encoder-decoder model for summarization (`sshleifer/distilbart-cnn-12-6`), which is architecturally suited for text generation.
 
@@ -121,7 +121,7 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 ## 6. Performance Deep Dive: The Fine-Tuned Classification Model
 
-After establishing a 60% accuracy baseline with the Zero-Shot model, the fine-tuned `DistilBERT` achieved **~100% accuracy** on the unseen test set, effectively solving the classification task.
+After establishing a 60% accuracy baseline with the Zero-Shot model (as verifiable by `src/evaluate.py`), the fine-tuned `DistilBERT` model achieved **~100% accuracy** on the unseen test set, effectively solving the classification task. The full training and evaluation process, including the generation of this report, is documented in `notebooks/Fine_Tuning_and_Evaluation.ipynb`.
 
 **Final Classification Report (Fine-Tuned Model):**
 ```
