@@ -26,7 +26,7 @@ This project adheres to professional software engineering and MLOps principles.
 
 ---
 
-## 3. 🚀 Operational Guide: Reproducing the Results
+## 3. Operational Guide: Reproducing the Results
 
 To fully reproduce and understand this project, please follow these steps.
 
@@ -85,19 +85,19 @@ To fully reproduce and understand this project, please follow these steps.
 
 This project comprehensively addresses all tasks outlined in the challenge document. This section explicitly maps the project's features to those original requirements.
 
-#### **✅ Essential Task: Sub-Category Classification**
+#### Essential Task: Sub-Category Classification (Status: Fulfilled)
 -   **Requirement:** *"Use the full text dataset and classify each existing category into sub-categories."*
 -   **Status:** **Fulfilled.**
 -   **Implementation:** This is performed by the Zero-Shot model within the `src/main.py` application.
 -   **Deliverable:** The `outputs/classification_results.csv` file.
 
-#### **✅ Desired Task 1: Named Entity Recognition**
+#### Desired Task 1: Named Entity Recognition (Status: Partially Fulfilled)
 -   **Requirement:** *"Identify documents and extract the named entities for media personalities, clearly identifying their jobs."*
 -   **Status:** **Partially Fulfilled.**
 -   **Implementation:** The NER model (`dslim/bert-base-NER`) successfully extracts `PERSON` entities from the text. The more advanced sub-task of **Relation Extraction** (linking an entity to its role) was identified as a challenging component. In line with the project guidelines which 'encourage submission of solutions even if it only partially meets the requirements,' this was pragmatically scoped out for this prototype.
 -   **Deliverable:** The `outputs/ner_results.csv` file demonstrates the successful entity extraction.
 
-#### **✅ Desired Task 2: Event Summarization**
+#### Desired Task 2: Event Summarization (Status: Fulfilled)
 -   **Requirement:** *"Extract summaries of anything that took place or is/was scheduled to take place in April."*
 -   **Status:** **Fulfilled.**
 -   **Implementation:** The main pipeline filters for articles containing "April" and uses a generative summarizer (`sshleifer/distilbart-cnn-12-6`).
@@ -111,7 +111,6 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 -   **Application Structure:** The project is built on a modular architecture (`/src`) to ensure stability and maintainability. Experimentation and model training are separated into a `/notebooks` directory, mirroring professional MLOps workflows.
 -   **Performance Optimization:** To improve efficiency during repeated evaluations, the model loading function is now decorated with Python’s `functools.lru_cache`. This ensures the model is loaded only once per process, significantly reducing redundant loading time and improving evaluation speed.
-
 -   **Model Selection Strategy:**
     -   **For Classification (Two-Phase Approach):**
         1.  **Baseline (Zero-Shot):** An initial Zero-Shot model (`valhalla/distilbart-mnli-12-3`) was used to rapidly establish a baseline and gain insights into data ambiguity without any custom training. Its performance metrics are available via `src/evaluate.py`.
