@@ -75,7 +75,7 @@ To fully reproduce and understand this project, please follow these steps.
 
 5.  **Generate/Obtain the High-Performance Model (GPU-Dependent Training):**
 
-    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/HMLR/blob/main/notebooks/Fine_Tuning_and_Evaluation.ipynb)
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/HMLR/blob/main/notebooks/Fine%20Tuning%20and%20Evaluation.ipynb)
 
     The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local use and evaluation:
     -   **Process:** Open the Colab notebook `notebooks/Fine Tuning and Evaluation.ipynb` in Google Colab (or click the badge above).
