@@ -60,8 +60,12 @@ To fully reproduce and understand this project, please follow these steps.
     ```
 
 5.  **Generate/Obtain the High-Performance Model (GPU-Dependent Training):**
+
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/HMLR/blob/main/notebooks/Fine_Tuning_and_Evaluation.ipynb)
+
     The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local use and evaluation:
-    -   **Process:** Open the Colab notebook `notebooks/Fine_Tuning_and_Evaluation.ipynb` in Google Colab.
+    -   **Process:** Open the Colab notebook `notebooks/Fine_Tuning_and_Evaluation.ipynb` in Google Colab (or click the badge above).
+    -   When opening the notebook in Colab, you may see a "Notebook not found" error. In this case, click the "Authorize with GitHub" button and grant Colab access to your private repositories. Make sure you are logged into GitHub with the account that owns or has access to this repository, and that you grant access to all repositories when prompted.
     -   Run all cells in the notebook. This process will:
         -   Prompt you to upload the `bbc.zip` data (same as step 2).
         -   Train the `DistilBERT` model using Colab's GPU.
