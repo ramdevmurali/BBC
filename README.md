@@ -85,7 +85,7 @@ To fully reproduce and understand this project, please follow these steps.
         - If not, you can download the notebook from GitHub, then go to [Google Colab](https://colab.research.google.com/), click “File” → “Upload notebook”, and select the file.
     -   **Note:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
     -   Run all cells in the notebook. This process will:
-        -   Prompt you to upload the `bbc.zip` data (same as step 2).
+        -   Prompt you to upload the `BBC Full Text.zip` data (same as step 2).
         -   Train the `DistilBERT` model using Colab's GPU.
         -   Generate its specific performance metrics and a `finetuned_confusion_matrix.png` within the notebook itself.
         -   Save the trained model files to a `bbc-distilbert-finetuned` folder and zip all results into `results.zip` for download.
