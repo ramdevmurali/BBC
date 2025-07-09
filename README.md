@@ -17,6 +17,7 @@ The approach addresses all core requirements of the challenge, resulting in a mo
 This project adheres to professional software engineering and MLOps principles.
 
 -   **Languages & Libraries:** Python 3.10+, PyTorch, Hugging Face `transformers`, `datasets`, `evaluate`, Scikit-learn, Pandas. Dependencies are precisely managed via `requirements.txt`.
+-   **Hardware:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
 -   **Architecture:**
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
     -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This cleanly separates research from deployable code.
@@ -69,6 +70,7 @@ To fully reproduce and understand this project, please follow these steps.
     -   **Alternatively, you can manually upload the notebook:**
         - If you have cloned the repository, simply upload `notebooks/Fine_Tuning_and_Evaluation.ipynb` from your local copy.
         - If not, you can download the notebook from GitHub, then go to [Google Colab](https://colab.research.google.com/), click “File” → “Upload notebook”, and select the file.
+    -   **Note:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
     -   Run all cells in the notebook. This process will:
         -   Prompt you to upload the `bbc.zip` data (same as step 2).
         -   Train the `DistilBERT` model using Colab's GPU.
