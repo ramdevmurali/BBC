@@ -5,6 +5,16 @@
 
 ---
 
+## Table of Contents
+
+1. [Executive Summary](#1-executive-summary)
+2. [Technical Stack & Engineering Principles](#2-technical-stack--engineering-principles)
+3. [Operational Guide: Reproducing the Results](#3-operational-guide-reproducing-the-results)
+4. [Task Fulfillment & Deliverables](#4-task-fulfillment--deliverables)
+5. [Architectural & Model Strategy](#5-architectural--model-strategy)
+6. [Performance Deep Dive: The Fine-Tuned Classification Model](#6-performance-deep-dive-the-fine-tuned-classification-model)
+7. [Production Readiness & Next Steps](#7-production-readiness--next-steps)
+
 ## 1. Executive Summary
 
 This repository presents a systematic investigation into a real-world text classification problem, as outlined in the HM Land Registry NLP Challenge. The project’s objective was not only to achieve high accuracy, but also to critically examine and justify the trade-offs between various modern NLP techniques, ranging from rapid baseline development to specialized fine-tuning.
@@ -105,7 +115,7 @@ This project comprehensively addresses all tasks outlined in the challenge docum
 #### Desired Task 1: Named Entity Recognition (Status: Partially Fulfilled)
 -   **Requirement:** *"Identify documents and extract the named entities for media personalities, clearly identifying their jobs."*
 -   **Status:** **Partially Fulfilled.**
--   **Implementation:** The NER model (`dslim/bert-base-NER`) successfully extracts `PERSON` entities from the text. The more advanced sub-task of **Relation Extraction** (linking an entity to its role) was identified as a challenging component. In line with the project guidelines which 'encourage submission of solutions even if it only partially meets the requirements,' this was pragmatically scoped out for this prototype.
+-   **Implementation:** The NER model (`dslim/bert-base-NER`) successfully extracts `PERSON` entities from the text. The current NER output does not attempt to assign or infer the professional roles (e.g., “musician,” “politician”) of the extracted PERSON entities. The more advanced sub-task of **Relation Extraction** (linking an entity to its role) was identified as a challenging component. Achieving the full requirement would involve implementing a relation extraction pipeline or leveraging prompt-based large language models to link each PERSON entity to their job or role, which was outside the scope of this prototype. In line with the project guidelines which 'encourage submission of solutions even if it only partially meets the requirements,' this was pragmatically scoped out for this prototype.
 -   **Deliverable:** The `outputs/ner_results.csv` file demonstrates the successful entity extraction.
 
 #### Desired Task 2: Event Summarization (Status: Fulfilled)
