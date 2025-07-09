@@ -49,9 +49,9 @@ To fully reproduce and understand this project, please follow these steps.
     ```
 
 2.  **Download Raw Data:**
-    -   Acquire the `bbc-fulltext.zip` dataset from the official UCD source: `http://mlg.ucd.ie/datasets/bbc.html` (specifically, the "Download raw text files" link under "Dataset: BBC").
+    -   Acquire the `BBC Full Text.zip` dataset from the official UCD source: `http://mlg.ucd.ie/datasets/bbc.html` (specifically, the "Download raw text files" link under "Dataset: BBC").
     -   **Create the raw data directory:** `mkdir -p data/raw`
-    -   **Unzip the dataset:** Place the `bbc` folder (extracted from `bbc-fulltext.zip`) directly into `data/raw/`.
+    -   **Unzip the dataset:** Place the `bbc` folder (extracted from `BBC Full Text.zip`) directly into `data/raw/`.
         *The final path to the dataset should be `hmlr-nlp-challenge/data/raw/bbc/`.*
 
 3.  **Set Up Python Environment:**
