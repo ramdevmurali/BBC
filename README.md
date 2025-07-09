@@ -29,7 +29,7 @@ This project adheres to professional software engineering and MLOps principles.
 -   **Languages & Libraries:** Python 3.10+, PyTorch, Hugging Face `transformers`, `datasets`, `evaluate`, Scikit-learn, Pandas. Dependencies are precisely managed via `requirements.txt`.
 -   **Hardware:**
     - Model fine-tuning (DistilBERT): Google Colab, NVIDIA T4 GPU
-    - Baseline evaluation, NER, and summarization: Local machine, Apple M1
+    - Baseline model (Zero-shot BART), NER, and summarization: Local machine, Apple M1
 -   **Architecture:**
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
     -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This cleanly separates research from deployable code.
