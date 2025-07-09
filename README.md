@@ -162,6 +162,9 @@ entertainment       0.97      1.00      0.99        39
 **Analysis of the ~100% Score:**
 This near-perfect result is interpreted not as simple success, but as evidence of **hyper-specialization**. The model has mastered the specific linguistic patterns of the *2005 BBC News corpus*. While it has successfully generalized to the held-out test set from the *same distribution*, this mastery is considered "brittle."
 
+**A Note on Performance Variance:**
+The model consistently achieves very high performance, with accuracy scores typically landing in the 98-100% range across different training runs. The slight variation in metrics (from ~100% in one run to 98% in another) is an expected and normal outcome, attributable to the stochastic nature of neural network training—specifically factors like random weight initialization of the classification head and the use of dropout. For a robust production system, one would typically train the model across several different random seeds and average the performance metrics to get a more stable estimate of its true generalization capability.
+
 ![Final Confusion Matrix](outputs/finetuned_confusion_matrix.png)
 
 ---
