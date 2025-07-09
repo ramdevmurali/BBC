@@ -78,10 +78,10 @@ To fully reproduce and understand this project, please follow these steps.
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/HMLR/blob/main/notebooks/Fine_Tuning_and_Evaluation.ipynb)
 
     The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local use and evaluation:
-    -   **Process:** Open the Colab notebook `notebooks/Fine_Tuning_and_Evaluation.ipynb` in Google Colab (or click the badge above).
+    -   **Process:** Open the Colab notebook `notebooks/Fine Tuning and Evaluation.ipynb` in Google Colab (or click the badge above).
     -   When opening the notebook in Colab, you may see a "Notebook not found" error. In this case, click the "Authorize with GitHub" button and grant Colab access to your private repositories. Make sure you are logged into GitHub with the account that owns or has access to this repository, and that you grant access to all repositories when prompted.
     -   **Alternatively, you can manually upload the notebook:**
-        - If you have cloned the repository, simply upload `notebooks/Fine_Tuning_and_Evaluation.ipynb` from your local copy.
+        - If you have cloned the repository, simply upload `notebooks/Fine Tuning and Evaluation.ipynb` from your local copy.
         - If not, you can download the notebook from GitHub, then go to [Google Colab](https://colab.research.google.com/), click “File” → “Upload notebook”, and select the file.
     -   **Note:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
     -   Run all cells in the notebook. This process will:
@@ -142,7 +142,7 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 ## 6. Performance Deep Dive: The Fine-Tuned Classification Model
 
-After establishing a 60% accuracy baseline with the Zero-Shot model (as verifiable by `src/evaluate.py`), the fine-tuned `DistilBERT` model achieved **~100% accuracy** on the unseen test set, effectively solving the classification task. The full training and evaluation process, including the generation of this report, is documented in `notebooks/Fine_Tuning_and_Evaluation.ipynb`.
+After establishing a 60% accuracy baseline with the Zero-Shot model (as verifiable by `src/evaluate.py`), the fine-tuned `DistilBERT` model achieved **~100% accuracy** on the unseen test set, effectively solving the classification task. The full training and evaluation process, including the generation of this report, is documented in `notebooks/Fine Tuning and Evaluation.ipynb`.
 
 **Final Classification Report (Fine-Tuned Model):**
 ```
