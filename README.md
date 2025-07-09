@@ -17,7 +17,9 @@ The approach addresses all core requirements of the challenge, resulting in a mo
 This project adheres to professional software engineering and MLOps principles.
 
 -   **Languages & Libraries:** Python 3.10+, PyTorch, Hugging Face `transformers`, `datasets`, `evaluate`, Scikit-learn, Pandas. Dependencies are precisely managed via `requirements.txt`.
--   **Hardware:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
+-   **Hardware:**
+    - Model fine-tuning (DistilBERT): Google Colab, NVIDIA T4 GPU
+    - Baseline evaluation, NER, and summarization: Local machine, Apple M1
 -   **Architecture:**
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
     -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This cleanly separates research from deployable code.
@@ -56,6 +58,7 @@ To fully reproduce and understand this project, please follow these steps.
 
 4.  **Run the Baseline Application (Local Execution):**
     This command executes the core application, which performs sub-category classification, NER, and summarization using the Zero-Shot model. Results are saved to `outputs/`.
+    **Note:** All baseline, NER, and summarization tasks were executed locally on an Apple M1 machine. These tasks are CPU-friendly and do not require a GPU.
     ```bash
     python -m src.main
     ```
