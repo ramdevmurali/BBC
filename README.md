@@ -165,7 +165,7 @@ This high result is interpreted not as simple success, but as evidence of **hype
 **A Note on Performance Variance:**
 The model consistently achieves very high performance, with accuracy scores typically landing in the 98-100% range across different training runs. The slight variation in metrics (from ~100% in one run to 98% in another) is an expected and normal outcome, attributable to the stochastic nature of neural network training—specifically factors like random weight initialization of the classification head and the use of dropout. For a robust production system, one would typically train the model across several different random seeds and average the performance metrics to get a more stable estimate of its true generalization capability.
 
-![Final Confusion Matrix](outputs/confusion_matrix.png)
+![Final Confusion Matrix](outputs/confusion_matrix_fine_tuning.png)
 
 ---
 
