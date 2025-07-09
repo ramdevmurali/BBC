@@ -142,30 +142,30 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 ## 6. Performance Deep Dive: The Fine-Tuned Classification Model
 
-After establishing a 60% accuracy baseline with the Zero-Shot model (as verifiable by `src/evaluate.py`), the fine-tuned `DistilBERT` model achieved **~100% accuracy** on the unseen test set, effectively solving the classification task. The full training and evaluation process, including the generation of this report, is documented in `notebooks/Fine Tuning and Evaluation.ipynb`.
+After establishing a 60% accuracy baseline with the Zero-Shot model (as verifiable by `src/evaluate.py`), the fine-tuned `DistilBERT` model achieved high accuracy (98%) on the unseen test set, effectively solving the classification task. The full training and evaluation process, including the generation of this report, is documented in `notebooks/Fine Tuning and Evaluation.ipynb`.
 
 **Final Classification Report (Fine-Tuned Model):**
 ```
                precision    recall  f1-score   support
 
-     business       1.00      1.00      1.00        51
-entertainment       0.97      1.00      0.99        39
-     politics       1.00      0.98      0.99        42
+     business       0.96      0.94      0.95        51
+entertainment       0.97      0.97      0.97        39
+     politics       0.95      0.98      0.96        42
         sport       1.00      1.00      1.00        51
          tech       1.00      1.00      1.00        40
 
-     accuracy                           1.00       223
-    macro avg       0.99      1.00      1.00       223
- weighted avg       1.00      1.00      1.00       223
+     accuracy                           0.98       223
+    macro avg       0.98      0.98      0.98       223
+ weighted avg       0.98      0.98      0.98       223
 ```
 
-**Analysis of the ~100% Score:**
-This near-perfect result is interpreted not as simple success, but as evidence of **hyper-specialization**. The model has mastered the specific linguistic patterns of the *2005 BBC News corpus*. While it has successfully generalized to the held-out test set from the *same distribution*, this mastery is considered "brittle."
+**Analysis of the 98% Score:**
+The fine-tuned DistilBERT model achieves high accuracy (98%) on the unseen test set, with perfect or near-perfect performance on several categories. The confusion matrix (see below) shows that most misclassifications are minor and occur between closely related categories. This result demonstrates strong generalization to the test set, while also illustrating the expected variance due to the stochastic nature of neural network training.
 
 **A Note on Performance Variance:**
 The model consistently achieves very high performance, with accuracy scores typically landing in the 98-100% range across different training runs. The slight variation in metrics (from ~100% in one run to 98% in another) is an expected and normal outcome, attributable to the stochastic nature of neural network training—specifically factors like random weight initialization of the classification head and the use of dropout. For a robust production system, one would typically train the model across several different random seeds and average the performance metrics to get a more stable estimate of its true generalization capability.
 
-![Final Confusion Matrix](outputs/finetuned_confusion_matrix.png)
+![Final Confusion Matrix](outputs/Confusion Matrix Fine Tuning.png)
 
 ---
 
