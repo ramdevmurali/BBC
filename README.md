@@ -1,7 +1,6 @@
-# HM Land Registry: A Critical Analysis of NLP Model Performance
+A Critical Analysis of NLP Model Performance on the BBC dataset
 
-**Candidate:** Ramdev Murali
-**Date:** July 9, 2025
+
 
 ---
 
