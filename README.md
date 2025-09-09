@@ -16,7 +16,7 @@ A Critical Analysis of NLP Model Performance on the BBC dataset
 
 ## 1. Executive Summary
 
-This repository presents a systematic investigation into a real-world text classification problem, as outlined in the HM Land Registry NLP Challenge. The project’s objective was not only to achieve high accuracy, but also to critically examine and justify the trade-offs between various modern NLP techniques, ranging from rapid baseline development to specialized fine-tuning.
+This repository presents a systematic investigation into a real-world text classification problem, as outlined in the *** NLP Challenge. The project’s objective was not only to achieve high accuracy, but also to critically examine and justify the trade-offs between various modern NLP techniques, ranging from rapid baseline development to specialized fine-tuning.
 The approach addresses all core requirements of the challenge, resulting in a model that achieves up to 98–100% accuracy on the primary classification task. The multi-stage methodology highlights careful model selection, iterative prototyping, performance optimization, and adherence to professional software engineering standards.
 
 ---
