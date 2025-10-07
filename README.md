@@ -43,8 +43,8 @@ To fully reproduce and understand this project, please follow these steps.
 
 1.  **Clone the Repository & Navigate:**
     ```bash
-    git clone https://github.com/ramdevmurali/HMLR.git
-    cd HMLR
+    git clone https://github.com/ramdevmurali/BBC.git
+    cd BBC
     ```
 
 2.  **Download Raw Data:**
