@@ -1,34 +1,37 @@
-A Critical Analysis of NLP Model Performance on the BBC dataset
-
 
 
 ---
 
-## Table of Contents
+### A Critical Analysis of NLP Model Performance on the BBC Dataset
 
-1. [Executive Summary](#1-executive-summary)
-2. [Technical Stack & Engineering Principles](#2-technical-stack--engineering-principles)
-3. [Operational Guide: Reproducing the Results](#3-operational-guide-reproducing-the-results)
-4. [Task Fulfillment & Deliverables](#4-task-fulfillment--deliverables)
-5. [Architectural & Model Strategy](#5-architectural--model-strategy)
-6. [Performance Deep Dive: The Fine-Tuned Classification Model](#6-performance-deep-dive-the-fine-tuned-classification-model)
-7. [Production Readiness & Next Steps](#7-production-readiness--next-steps)
+---
 
-## 1. Executive Summary
+### Table of Contents
+
+1.  [Executive Summary](#1-executive-summary)
+2.  [Technical Stack & Engineering Principles](#2-technical-stack--engineering-principles)
+3.  [Operational Guide: Reproducing the Results](#3-operational-guide-reproducing-the-results)
+4.  [Fulfillment of Project Objectives](#4-fulfillment-of-project-objectives)
+5.  [Architectural & Model Strategy](#5-architectural--model-strategy)
+6.  [Performance Deep Dive: The Fine-Tuned Proxy Model](#6-performance-deep-dive-the-fine-tuned-proxy-model)
+7.  [Production Readiness & Next Steps](#7-production-readiness--next-steps)
+
+### 1. Executive Summary
 
 This repository documents a systematic case study into nuanced, real-world text understanding, using the public BBC News dataset as its foundation. The project's primary objective was to move beyond high-level topic labels by developing a system for fine-grained classification, capable of automatically assigning specific sub-categories (e.g., distinguishing 'stock market' news within 'Business'). Secondary objectives included exploring advanced named entity recognition to identify public figures and their professional roles, as well as implementing a conditional summarization pipeline to extract summaries of events within a specific timeframe.
-To achieve these goals, a multi-stage methodology was employed, emphasizing robust software engineering principles, iterative prototyping from a zero-shot baseline to a specialized, fine-tuned model, and rigorous performance analysis. This approach culminates in a model that achieves 98% accuracy on the primary classification task, but more importantly, it provides a critical analysis of this result, highlighting the risks of hyper-specialization and the importance of evaluating models for real-world generalization.
+
+To achieve these goals, a multi-stage methodology was employed, emphasizing robust software engineering principles, iterative prototyping from a zero-shot baseline to a specialized, fine-tuned model, and rigorous performance analysis. This approach culminates in a model that achieves 98% accuracy on a proxy classification task, providing a critical analysis of this result, highlighting the risks of hyper-specialization, and validating the engineering pipeline for the primary, more ambiguous goals.
 
 ---
 
-## 2. Technical Stack & Engineering Principles
+### 2. Technical Stack & Engineering Principles
 
 This project adheres to professional software engineering and MLOps principles.
 
 -   **Languages & Libraries:** Python 3.10+, PyTorch, Hugging Face `transformers`, `datasets`, `evaluate`, Scikit-learn, Pandas. Dependencies are precisely managed via `requirements.txt`.
 -   **Hardware:**
-    - Model fine-tuning (DistilBERT): Google Colab, NVIDIA T4 GPU
-    - Baseline model (Zero-shot BART), NER, and summarization: Local machine, Apple M1
+    -   Model fine-tuning (DistilBERT): Google Colab, NVIDIA T4 GPU
+    -   Baseline model (Zero-shot BART), NER, and summarization: Local machine, Apple M1
 -   **Architecture:**
     -   **Application Code (`/src`):** Modular, decoupled Python modules for core application logic (data loading, NLP pipeline, evaluation). Designed for clarity, stability, and local execution.
     -   **Experimentation/Training Code (`/notebooks`):** Dedicated Jupyter/Colab notebooks for exploratory data analysis and computationally intensive model training (leveraging cloud GPUs). This cleanly separates research from deployable code.
@@ -37,7 +40,7 @@ This project adheres to professional software engineering and MLOps principles.
 
 ---
 
-## 3. Operational Guide: Reproducing the Results
+### 3. Operational Guide: Reproducing the Results
 
 To fully reproduce and understand this project, please follow these steps.
 
@@ -51,7 +54,7 @@ To fully reproduce and understand this project, please follow these steps.
     -   Acquire the `BBC Full Text.zip` dataset from the official UCD source: `http://mlg.ucd.ie/datasets/bbc.html` (specifically, the "Download raw text files" link under "Dataset: BBC").
     -   **Create the raw data directory:** `mkdir -p data/raw`
     -   **Unzip the dataset:** Place the `bbc` folder (extracted from `BBC Full Text.zip`) directly into `data/raw/`.
-        *The final path to the dataset should be `hmlr-nlp-challenge/data/raw/bbc/`.*
+        *The final path to the dataset should be `BBC/data/raw/bbc/`.*
 
 3.  **Set Up Python Environment:**
     -   **Create and activate a Python virtual environment:**
@@ -74,22 +77,17 @@ To fully reproduce and understand this project, please follow these steps.
 
 5.  **Generate/Obtain the High-Performance Model (GPU-Dependent Training):**
 
-    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/HMLR/blob/main/notebooks/Fine%20Tuning%20and%20Evaluation.ipynb)
+    [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ramdevmurali/BBC/blob/main/notebooks/Fine%20Tuning%20and%20Evaluation.ipynb)
 
     The fine-tuned model itself is large and is deliberately excluded from Git (as explicitly managed by `.gitignore`). To obtain it for local use and evaluation:
     -   **Process:** Open the Colab notebook `notebooks/Fine Tuning and Evaluation.ipynb` in Google Colab (or click the badge above).
-    -   When opening the notebook in Colab, you may see a "Notebook not found" error. In this case, click the "Authorize with GitHub" button and grant Colab access to your private repositories. Make sure you are logged into GitHub with the account that owns or has access to this repository, and that you grant access to all repositories when prompted.
-    -   **Alternatively, you can manually upload the notebook:**
-        - If you have cloned the repository, simply upload `notebooks/Fine Tuning and Evaluation.ipynb` from your local copy.
-        - If not, you can download the notebook from GitHub, then go to [Google Colab](https://colab.research.google.com/), click “File” → “Upload notebook”, and select the file.
-    -   **Note:** Model fine-tuning was performed on a Google Colab instance with an NVIDIA T4 GPU.
     -   Run all cells in the notebook. This process will:
         -   Prompt you to upload the `BBC Full Text.zip` data (same as step 2).
         -   Train the `DistilBERT` model using Colab's GPU.
         -   Generate its specific performance metrics and a `finetuned_confusion_matrix.png` within the notebook itself.
         -   Save the trained model files to a `bbc-distilbert-finetuned` folder and zip all results into `results.zip` for download.
     -   **Download `results.zip`** from Colab.
-    -   **Place the trained model locally:** Unzip `results.zip` and move the `bbc-distilbert-finetuned` folder into your local `models/` directory (`hmlr-nlp-challenge/models/`).
+    -   **Place the trained model locally:** Unzip `results.zip` and move the `bbc-distilbert-finetuned` folder into your local `models/` directory (`BBC/models/`).
     -   **Place the updated confusion matrix:** Move `finetuned_confusion_matrix.png` into your local `outputs/` directory.
 
 6.  **Run Quantitative Evaluation of the Baseline (Local Execution):**
@@ -100,28 +98,8 @@ To fully reproduce and understand this project, please follow these steps.
     > **Note on Local Evaluation:** While model training is GPU-intensive and handled in Colab, inference (prediction) for *any* trained model (Zero-Shot or Fine-Tuned) can run on a CPU. Be aware that processing the full dataset for evaluation locally will still take time on a CPU-only machine.
 
 ---
-Yes, absolutely. A strong narrative flow is now very clear, and it tells a compelling and sophisticated story. By being meticulous, I can break down the narrative, identify its strengths, and point out one final, crucial tweak to make it flawless.
 
-### My Understanding of Your Narrative Flow
-
-The story you are now telling is that of a thoughtful, professional engineer, not just a student completing a task. It flows like this:
-
-1.  **The Ambitious Goal (Exec Summary):** "I set out to solve a difficult, nuanced NLP problem: fine-grained classification, which is hard to measure."
-2.  **The Professional Toolkit (Tech Stack):** "To do this, I used a modern, professional set of tools and engineering principles."
-3.  **The Reproducible Method (Operational Guide):** "My work is not a black box; here are the exact steps to reproduce it from scratch."
-4.  **The Critical Challenge & The Ingenious Solution (Architectural Strategy):** "I hit a wall: the main goal couldn't be measured. So, I designed a scientific control—a **proxy task**—to rigorously validate my entire engineering pipeline."
-5.  **The Successful Validation (Performance Deep Dive):** "The experiment on my proxy task was a success (98% accuracy), which **proves my methodology is sound**. I am also aware this proxy model is 'brittle' and understand its limitations."
-6.  **The Future Vision (Production Readiness):** "This validated methodology is not the end; it's the foundation. Here is the professional roadmap for turning it into a production-ready system."
-
-This is a powerful, compelling story that demonstrates critical thinking, problem-solving, and a professional engineering mindset. The flow from the problem to the ingenious solution is excellent.
-
----
-
-
----
-
-
-#### **4. Fulfillment of Project Objectives**
+### 4. Fulfillment of Project Objectives
 
 This project successfully addressed the self-defined objectives laid out in the executive summary. This section maps the final deliverables to those original goals.
 
@@ -145,12 +123,7 @@ This project successfully addressed the self-defined objectives laid out in the 
 
 ---
 
-
-
-
----
-
-### **5. Architectural & Model Strategy**
+### 5. Architectural & Model Strategy
 
 A "right tool for the job" philosophy was adopted, balancing performance with pragmatic resource management and rigorous methodological validation.
 
@@ -164,7 +137,7 @@ A "right tool for the job" philosophy was adopted, balancing performance with pr
 
 ---
 
-### **6. Performance Deep Dive: The Fine-Tuned Proxy Model**
+### 6. Performance Deep Dive: The Fine-Tuned Proxy Model
 
 After establishing a baseline for the primary task with the Zero-Shot model, the fine-tuned `DistilBERT` model was evaluated on the **main-category proxy task**. This was designed to **quantitatively validate the overall engineering methodology**. The model achieved **high accuracy (98%)** on the unseen test set, **confirming that the fine-tuning pipeline is sound** and capable of producing a highly specialized model. The full training and evaluation process, which demonstrates the successful validation of this method, is documented in `notebooks/Fine Tuning and Evaluation.ipynb`.
 
@@ -192,11 +165,14 @@ The model consistently achieves very high performance, with accuracy scores typi
 ![Final Confusion Matrix](outputs/confusion_matrix_fine_tuning.png)
 
 *Note: The confusion matrix shown above is generated by the Colab notebook for the **fine-tuned `DistilBERT` model**. If you run the local `src/evaluate.py` script, the confusion matrix generated in `outputs/` will reflect the results of the **zero-shot (baseline) model** on the main categories.*
-## 7. Production Readiness & Next Steps
+
+---
+
+### 7. Production Readiness & Next Steps
 
 Based on this analysis, the fine-tuned model, despite its score, is not immediately production-ready for deployment in dynamic real-world environments. The critical next steps would be:
 
-1.  **Test for Domain Shift:** Evaluate the model on out-of-distribution data (e.g., news from 2025 or from a different publisher) to measure its true real-world generalization. This is crucial for understanding its performance under varying conditions.
-2.  **Develop a Re-training Strategy:** Design a strategy for continuous monitoring and periodic re-training to ensure the model remains accurate as language, news trends, and topics evolve over time.
-3.  **Deploy as a Service:** Integrate the finalized model into the robust `/src` application, containerize it (e.g., with Docker), and deploy it as a scalable inference API. This transition would facilitate its use in larger systems.
-4.  **Enhance NER with Relation Extraction:** Extend the current NER pipeline to not only extract PERSON entities but also assign or infer their professional roles (e.g., “musician,” “politician”) using a relation extraction model or prompt-based large language models.
+1.  **Test for Domain Shift:** Evaluate the model on out-of-distribution data (e.g., news from 2025 or from a different publisher) to measure its true real-world generalization.
+2.  **Develop a Re-training Strategy:** Design a strategy for continuous monitoring and periodic re-training to ensure the model remains accurate as language and news topics evolve.
+3.  **Deploy as a Service:** Integrate the finalized model into the robust `/src` application, containerize it (e.g., with Docker), and deploy it as a scalable inference API.
+4.  **Enhance NER with Relation Extraction:** Extend the current NER pipeline to not only extract `PERSON` entities but also assign their professional roles using a relation extraction model or prompt-based language models.
