@@ -16,8 +16,9 @@ A Critical Analysis of NLP Model Performance on the BBC dataset
 
 ## 1. Executive Summary
 
-This repository presents a systematic investigation into a real-world text classification problem, as outlined in the *** NLP Challenge. The project’s objective was not only to achieve high accuracy, but also to critically examine and justify the trade-offs between various modern NLP techniques, ranging from rapid baseline development to specialized fine-tuning.
-The approach addresses all core requirements of the challenge, resulting in a model that achieves up to 98–100% accuracy on the primary classification task. The multi-stage methodology highlights careful model selection, iterative prototyping, performance optimization, and adherence to professional software engineering standards.
+This repository documents a systematic case study into real-world text classification, using the public BBC News dataset as its foundation. The primary objective was not merely to achieve high classification accuracy, but to critically examine and justify the trade-offs between different NLP techniques—from rapid, zero-shot baselining to specialized, computationally intensive fine-tuning.
+The project's multi-stage methodology emphasizes robust software engineering principles, iterative prototyping, and performance optimization. This approach culminates in a fine-tuned model that achieves 98% accuracy on the classification task, but more importantly, it provides a critical analysis of this result, highlighting the risks of hyper-specialization and the importance of evaluating models for real-world generalization.
+
 
 ---
 
